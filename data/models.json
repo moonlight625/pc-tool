@@ -1,0 +1,90 @@
+[
+  {
+    "id": "m001",
+    "maker": "FMV",
+    "name": "FMV LIFEBOOK AH（仮データ）",
+    "model_no": "FMVA77H2L",
+    "memory": 16,
+    "copilot_plus": false,
+    "form_factor": "standard",
+    "tenji": true,
+    "stock": true
+  },
+  {
+    "id": "m002",
+    "maker": "FMV",
+    "name": "FMV Zero（仮データ）",
+    "model_no": "FMVWC1J3",
+    "memory": 16,
+    "copilot_plus": true,
+    "form_factor": "mobile",
+    "tenji": true,
+    "stock": false
+  },
+  {
+    "id": "m003",
+    "maker": "NEC",
+    "name": "LAVIE N15（仮データ）",
+    "model_no": "PC-N1575GAL",
+    "memory": 16,
+    "copilot_plus": false,
+    "form_factor": "standard",
+    "tenji": true,
+    "stock": true
+  },
+  {
+    "id": "m004",
+    "maker": "NEC",
+    "name": "LAVIE A23 一体型（仮データ）",
+    "model_no": "PC-A2377GAB",
+    "memory": 16,
+    "copilot_plus": false,
+    "form_factor": "desktop",
+    "tenji": true,
+    "stock": true
+  },
+  {
+    "id": "m005",
+    "maker": "dynabook",
+    "name": "dynabook RZ（仮データ）",
+    "model_no": "W6RZHW7BBL",
+    "memory": 32,
+    "copilot_plus": true,
+    "form_factor": "mobile",
+    "tenji": true,
+    "stock": true
+  },
+  {
+    "id": "m006",
+    "maker": "DELL",
+    "name": "Inspiron 15（仮データ）",
+    "model_no": "NI375-DNLC",
+    "memory": 8,
+    "copilot_plus": false,
+    "form_factor": "standard",
+    "tenji": false,
+    "stock": true
+  },
+  {
+    "id": "m007",
+    "maker": "Lenovo",
+    "name": "Yoga Slim 7x（仮データ）",
+    "model_no": "83ED001JJP",
+    "memory": 32,
+    "copilot_plus": true,
+    "form_factor": "mobile",
+    "tenji": true,
+    "stock": false
+  },
+  {
+    "id": "m008",
+    "maker": "VAIO",
+    "name": "VAIO SX14（仮データ）",
+    "model_no": "VJS14690112B",
+    "memory": 16,
+    "copilot_plus": false,
+    "form_factor": "mobile",
+    "tenji": false,
+    "stock": true
+  }
+]

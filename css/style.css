@@ -163,6 +163,105 @@ body {
   color: #888;
 }
 
+/* 条件に合う機種 */
+.models-head {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-top: 20px;
+  padding-top: 12px;
+  border-top: 2px solid #2b4a6f;
+}
+
+.models-head h2 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+#models-count {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.model-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-top: 10px;
+}
+
+.model-name {
+  font-weight: 600;
+}
+
+.model-spec {
+  color: #555;
+  font-size: 0.9rem;
+  margin-top: 2px;
+}
+
+.model-badges {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.badge {
+  font-size: 0.8rem;
+  border-radius: 4px;
+  padding: 2px 8px;
+}
+
+.badge-tenji {
+  background: #e3ebf4;
+  color: #2b4a6f;
+}
+
+.badge-stock {
+  background: #e2f3e6;
+  color: #216b34;
+}
+
+.badge-nostock {
+  background: #f4e3e3;
+  color: #8a2b2b;
+}
+
+.model-copy-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.model-no {
+  flex: 1;
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.95rem;
+  background: #f0f2f5;
+  border-radius: 4px;
+  padding: 6px 8px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.copy-btn {
+  min-height: 44px;
+  padding: 8px 14px;
+  font-size: 0.9rem;
+  border: 1px solid #2b4a6f;
+  border-radius: 6px;
+  background: #fff;
+  color: #2b4a6f;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.copy-btn:disabled {
+  background: #2b4a6f;
+  color: #fff;
+}
+
 /* Tipsページ */
 .tips-layout {
   max-width: 800px;

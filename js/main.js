@@ -22,12 +22,17 @@ const VALUE_LABELS = {
 const KEY_ORDER = ["memory_min", "memory_rec", "copilot_plus", "form_factor", "office_makers", "maker", "deadline"];
 
 let questions = [];
+let models = [];
 // 選択状態: { questionId: Set(optionId) }
 const selections = {};
 
 async function init() {
-  const res = await fetch("data/pc.json");
-  const data = await res.json();
+  const [pcRes, modelsRes] = await Promise.all([
+    fetch("data/pc.json"),
+    fetch("data/models.json")
+  ]);
+  const data = await pcRes.json();
+  models = await modelsRes.json();
   questions = data.questions;
   renderQuestions();
   document.getElementById("reset-btn").addEventListener("click", resetAll);
@@ -148,6 +153,8 @@ function renderSummary() {
   const merged = mergeConditions();
   const keys = Object.keys(merged);
 
+  renderModels(merged);
+
   if (keys.length === 0) {
     summary.innerHTML = '<p class="placeholder">項目を選ぶとここに条件が表示されます</p>';
     return;
@@ -196,6 +203,104 @@ function renderSummary() {
 
   summary.innerHTML = "";
   summary.appendChild(table);
+}
+
+// 条件を満たす機種か判定（条件が指定されていない項目は絞り込みに使わない）
+function matchesModel(merged, model) {
+  if ("memory_min" in merged && model.memory < merged.memory_min) return false;
+  if (merged.copilot_plus === true && !model.copilot_plus) return false;
+  if ("form_factor" in merged) {
+    const ff = Array.isArray(merged.form_factor) ? merged.form_factor : [merged.form_factor];
+    if (!ff.includes(model.form_factor)) return false;
+  }
+  if ("maker" in merged) {
+    const makers = Array.isArray(merged.maker) ? merged.maker : [merged.maker];
+    if (!makers.includes(model.maker)) return false;
+  }
+  return true;
+}
+
+async function copyModelNo(modelNo, btn) {
+  try {
+    await navigator.clipboard.writeText(modelNo);
+  } catch (e) {
+    // クリップボードAPIが使えない環境向けのフォールバック
+    const ta = document.createElement("textarea");
+    ta.value = modelNo;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand("copy");
+    ta.remove();
+  }
+  const original = btn.textContent;
+  btn.textContent = "コピーしました";
+  btn.disabled = true;
+  setTimeout(() => {
+    btn.textContent = original;
+    btn.disabled = false;
+  }, 1200);
+}
+
+function renderModels(merged) {
+  const container = document.getElementById("models");
+  const count = document.getElementById("models-count");
+  container.innerHTML = "";
+
+  const matched = models.filter((m) => matchesModel(merged, m));
+  count.textContent = matched.length + "件";
+
+  if (matched.length === 0) {
+    container.innerHTML = '<p class="placeholder">条件に合う機種がありません</p>';
+    return;
+  }
+
+  matched.forEach((m) => {
+    const card = document.createElement("div");
+    card.className = "model-card";
+
+    const name = document.createElement("div");
+    name.className = "model-name";
+    name.textContent = m.name;
+    card.appendChild(name);
+
+    const spec = document.createElement("div");
+    spec.className = "model-spec";
+    const specParts = [m.maker, m.memory + "GB", formatValue("form_factor", m.form_factor)];
+    if (m.copilot_plus) specParts.push("Copilot+ PC");
+    spec.textContent = specParts.join(" ／ ");
+    card.appendChild(spec);
+
+    const badges = document.createElement("div");
+    badges.className = "model-badges";
+    if (m.tenji) badges.appendChild(makeBadge("展示中", "badge-tenji"));
+    badges.appendChild(makeBadge(m.stock ? "在庫あり" : "在庫なし", m.stock ? "badge-stock" : "badge-nostock"));
+    card.appendChild(badges);
+
+    const row = document.createElement("div");
+    row.className = "model-copy-row";
+
+    const no = document.createElement("code");
+    no.className = "model-no";
+    no.textContent = m.model_no;
+    row.appendChild(no);
+
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "copy-btn";
+    btn.textContent = "型番コピー";
+    btn.addEventListener("click", () => copyModelNo(m.model_no, btn));
+    row.appendChild(btn);
+
+    card.appendChild(row);
+    container.appendChild(card);
+  });
+}
+
+function makeBadge(text, cls) {
+  const span = document.createElement("span");
+  span.className = "badge " + cls;
+  span.textContent = text;
+  return span;
 }
 
 init().catch((err) => {
