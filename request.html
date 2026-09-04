@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PC案内ツール - 改善要望</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <h1>改善要望</h1>
+    <nav>
+      <a href="index.html">チェックリストへ戻る</a>
+    </nav>
+  </header>
+
+  <main class="request-layout">
+    <p class="request-note">ツールへの要望・不具合報告・追加してほしい機種やTipsなど、なんでもどうぞ。Discordに送信されます。</p>
+
+    <form id="request-form">
+      <label for="req-name">名前（任意）</label>
+      <input type="text" id="req-name" maxlength="50" placeholder="例: 山田">
+
+      <label for="req-body">内容 <span class="required">必須</span></label>
+      <textarea id="req-body" rows="6" required placeholder="例: 機種リストに◯◯を追加してほしい"></textarea>
+
+      <button type="submit" id="send-btn">送信</button>
+      <p id="send-result" role="status"></p>
+    </form>
+  </main>
+
+  <script src="js/request.js"></script>
+</body>
+</html>

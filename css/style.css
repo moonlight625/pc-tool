@@ -27,6 +27,12 @@ body {
   font-size: 1.2rem;
 }
 
+.site-header nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .site-header a {
   color: #fff;
   text-decoration: underline;
@@ -320,6 +326,85 @@ body {
 .updated {
   color: #888;
   margin-left: auto;
+}
+
+/* 改善要望フォーム */
+.request-layout {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.request-note {
+  color: #555;
+  margin: 0 0 16px;
+}
+
+#request-form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+#request-form label {
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+.required {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #8a2b2b;
+  background: #f4e3e3;
+  border-radius: 4px;
+  padding: 1px 6px;
+  margin-left: 4px;
+}
+
+#request-form input,
+#request-form textarea {
+  font-size: 1rem;
+  font-family: inherit;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 10px 12px;
+}
+
+#request-form input {
+  min-height: 44px;
+}
+
+#send-btn {
+  margin-top: 12px;
+  min-height: 44px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  background: #2b4a6f;
+  color: #fff;
+  cursor: pointer;
+}
+
+#send-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+#send-result {
+  margin: 8px 0 0;
+  min-height: 1.2em;
+}
+
+.result-ok {
+  color: #216b34;
+}
+
+.result-error {
+  color: #8a2b2b;
 }
 
 /* タブレット・スマホ: 1カラムに */
