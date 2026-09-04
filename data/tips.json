@@ -1,0 +1,18 @@
+[
+  {
+    "id": "t001",
+    "category": "メモリ",
+    "title": "動画編集は16GBでは足りないことが多い",
+    "body": "4K素材や複数トラックを扱うと16GBでも詰まる。32GBを基本に案内する。",
+    "tags": ["動画編集", "メモリ"],
+    "updated": "2026-09-04"
+  },
+  {
+    "id": "t002",
+    "category": "Office",
+    "title": "Office付きモデルの見分け方",
+    "body": "型番末尾やPOPで確認。付属Officeの種類（Home & Business / Personal）も併せて伝える。",
+    "tags": ["Office"],
+    "updated": "2026-09-04"
+  }
+]

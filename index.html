@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PC案内ツール - チェックリスト</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <h1>PC案内ツール</h1>
+    <nav>
+      <a href="tips.html">Tips／知識ページ</a>
+    </nav>
+  </header>
+
+  <main class="checklist-layout">
+    <section class="questions-col" id="questions">
+      <!-- pc.json から質問を描画 -->
+    </section>
+
+    <aside class="summary-col">
+      <div class="summary-head">
+        <h2>条件サマリー</h2>
+        <button type="button" id="reset-btn">リセット</button>
+      </div>
+      <div id="summary">
+        <p class="placeholder">項目を選ぶとここに条件が表示されます</p>
+      </div>
+    </aside>
+  </main>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,214 @@
+/* PC案内ツール 共通スタイル */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+  background: #f5f6f8;
+  color: #222;
+  line-height: 1.6;
+}
+
+/* ヘッダー */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  background: #2b4a6f;
+  color: #fff;
+}
+
+.site-header h1 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.site-header a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* チェックリスト画面: 2カラム */
+.checklist-layout {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  align-items: flex-start;
+}
+
+.questions-col {
+  flex: 2;
+}
+
+.summary-col {
+  flex: 1;
+  position: sticky;
+  top: 20px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.summary-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.summary-head h2 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+/* 質問ブロック */
+.question {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.question h3 {
+  margin: 0 0 10px;
+  font-size: 1rem;
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* ボタン: タップしやすく高さ44px以上 */
+.option-btn {
+  min-height: 44px;
+  padding: 10px 18px;
+  font-size: 1rem;
+  border: 1px solid #2b4a6f;
+  border-radius: 6px;
+  background: #fff;
+  color: #2b4a6f;
+  cursor: pointer;
+}
+
+.option-btn.selected {
+  background: #2b4a6f;
+  color: #fff;
+}
+
+#reset-btn {
+  min-height: 44px;
+  padding: 8px 16px;
+  font-size: 0.95rem;
+  border: 1px solid #999;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+}
+
+/* サマリー表 */
+.summary-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.summary-table th,
+.summary-table td {
+  text-align: left;
+  padding: 6px 8px;
+  border-bottom: 1px solid #eee;
+  vertical-align: top;
+}
+
+.summary-table th {
+  white-space: nowrap;
+  color: #555;
+  font-weight: 600;
+}
+
+.placeholder {
+  color: #888;
+}
+
+/* Tipsページ */
+.tips-layout {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.search-box input {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 14px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.tips-category h2 {
+  font-size: 1.1rem;
+  border-bottom: 2px solid #2b4a6f;
+  padding-bottom: 4px;
+  margin: 24px 0 12px;
+}
+
+.tip-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+}
+
+.tip-card h3 {
+  margin: 0 0 6px;
+  font-size: 1rem;
+}
+
+.tip-body {
+  margin: 0 0 8px;
+}
+
+.tip-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  font-size: 0.85rem;
+}
+
+.tag {
+  background: #e3ebf4;
+  color: #2b4a6f;
+  border-radius: 4px;
+  padding: 2px 8px;
+}
+
+.updated {
+  color: #888;
+  margin-left: auto;
+}
+
+/* タブレット・スマホ: 1カラムに */
+@media (max-width: 768px) {
+  .checklist-layout {
+    flex-direction: column;
+  }
+
+  .summary-col {
+    position: static;
+    width: 100%;
+  }
+
+  .questions-col {
+    width: 100%;
+  }
+}

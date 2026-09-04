@@ -1,0 +1,55 @@
+{
+  "category": "notebook",
+  "questions": [
+    {
+      "id": "usage",
+      "label": "主な用途",
+      "multiple": true,
+      "options": [
+        { "id": "web",    "label": "ネット・Web会議",   "conditions": { "memory_min": 8,  "memory_rec": 16, "npu": false } },
+        { "id": "office", "label": "Office・レポート",  "conditions": { "memory_min": 8,  "memory_rec": 16, "npu": false } },
+        { "id": "video",  "label": "動画編集",          "conditions": { "memory_min": 16, "memory_rec": 32, "npu": false } },
+        { "id": "ai",     "label": "AI機能を使いたい",  "conditions": { "memory_min": 16, "memory_rec": 16, "npu": true } }
+      ]
+    },
+    {
+      "id": "portability",
+      "label": "持ち運び",
+      "multiple": false,
+      "options": [
+        { "id": "mobile", "label": "よく持ち運ぶ",       "conditions": { "form_factor": "mobile" } },
+        { "id": "home",   "label": "家の中だけ",         "conditions": { "form_factor": "standard" } }
+      ]
+    },
+    {
+      "id": "office_pref",
+      "label": "Officeの希望",
+      "multiple": false,
+      "options": [
+        { "id": "need",   "label": "Officeが必要",       "conditions": { "office_makers": ["FMV", "NEC", "dynabook"] } },
+        { "id": "none",   "label": "不要・別途契約",     "conditions": {} }
+      ]
+    },
+    {
+      "id": "maker",
+      "label": "希望メーカー",
+      "multiple": true,
+      "options": [
+        { "id": "fmv",      "label": "FMV",      "conditions": { "maker": "FMV" } },
+        { "id": "nec",      "label": "NEC",      "conditions": { "maker": "NEC" } },
+        { "id": "dynabook", "label": "dynabook", "conditions": { "maker": "dynabook" } },
+        { "id": "any",      "label": "こだわらない", "conditions": {} }
+      ]
+    },
+    {
+      "id": "deadline",
+      "label": "購入時期",
+      "multiple": false,
+      "options": [
+        { "id": "today", "label": "今日持ち帰りたい", "conditions": { "deadline": "today" } },
+        { "id": "soon",  "label": "1〜2週間以内",     "conditions": { "deadline": "soon" } },
+        { "id": "later", "label": "検討中",           "conditions": { "deadline": "later" } }
+      ]
+    }
+  ]
+}
