@@ -6,19 +6,21 @@
       "label": "主な用途",
       "multiple": true,
       "options": [
-        { "id": "web",    "label": "ネット・Web会議",   "conditions": { "memory_min": 8,  "memory_rec": 16, "npu": false } },
-        { "id": "office", "label": "Office・レポート",  "conditions": { "memory_min": 8,  "memory_rec": 16, "npu": false } },
-        { "id": "video",  "label": "動画編集",          "conditions": { "memory_min": 16, "memory_rec": 32, "npu": false } },
-        { "id": "ai",     "label": "AI機能を使いたい",  "conditions": { "memory_min": 16, "memory_rec": 16, "npu": true } }
+        { "id": "web",    "label": "ネット・Web会議",   "conditions": { "memory_min": 16, "memory_rec": 16 } },
+        { "id": "office", "label": "Office・レポート",  "conditions": { "memory_min": 16, "memory_rec": 16 } },
+        { "id": "univ",   "label": "大学で使う",        "conditions": { "memory_min": 16, "memory_rec": 16 } },
+        { "id": "video",  "label": "動画編集",          "conditions": { "memory_min": 16, "memory_rec": 32 } },
+        { "id": "ai",     "label": "AI・Copilotに興味がある", "conditions": { "memory_min": 16, "memory_rec": 16, "copilot_plus": true } }
       ]
     },
     {
-      "id": "portability",
-      "label": "持ち運び",
+      "id": "pc_type",
+      "label": "PCの種類",
       "multiple": false,
       "options": [
-        { "id": "mobile", "label": "よく持ち運ぶ",       "conditions": { "form_factor": "mobile" } },
-        { "id": "home",   "label": "家の中だけ",         "conditions": { "form_factor": "standard" } }
+        { "id": "mobile",  "label": "モバイル（持ち運び向き）",             "conditions": { "form_factor": "mobile" } },
+        { "id": "note",    "label": "ノート（あまり持ち運びは考えていない）", "conditions": { "form_factor": "standard" } },
+        { "id": "desktop", "label": "デスクトップ（モニター一体型）",        "conditions": { "form_factor": "desktop" } }
       ]
     },
     {
@@ -32,12 +34,15 @@
     },
     {
       "id": "maker",
-      "label": "希望メーカー",
+      "label": "使っていた・欲しいメーカー",
       "multiple": true,
       "options": [
         { "id": "fmv",      "label": "FMV",      "conditions": { "maker": "FMV" } },
         { "id": "nec",      "label": "NEC",      "conditions": { "maker": "NEC" } },
         { "id": "dynabook", "label": "dynabook", "conditions": { "maker": "dynabook" } },
+        { "id": "dell",     "label": "DELL",     "conditions": { "maker": "DELL" } },
+        { "id": "lenovo",   "label": "Lenovo",   "conditions": { "maker": "Lenovo" } },
+        { "id": "vaio",     "label": "VAIO",     "conditions": { "maker": "VAIO" } },
         { "id": "any",      "label": "こだわらない", "conditions": {} }
       ]
     },
@@ -48,7 +53,7 @@
       "options": [
         { "id": "today", "label": "今日持ち帰りたい", "conditions": { "deadline": "today" } },
         { "id": "soon",  "label": "1〜2週間以内",     "conditions": { "deadline": "soon" } },
-        { "id": "later", "label": "検討中",           "conditions": { "deadline": "later" } }
+        { "id": "later", "label": "いつでも・検討中", "conditions": { "deadline": "later" } }
       ]
     }
   ]

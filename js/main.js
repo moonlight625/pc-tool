@@ -5,7 +5,7 @@
 const KEY_LABELS = {
   memory_min: "メモリ（最低）",
   memory_rec: "メモリ（推奨）",
-  npu: "NPU",
+  copilot_plus: "Copilot+ PC",
   form_factor: "本体",
   office_makers: "Office",
   maker: "メーカー",
@@ -14,12 +14,12 @@ const KEY_LABELS = {
 
 // 値 → 日本語表示の対応表（キーごと。未知の値はそのまま表示）
 const VALUE_LABELS = {
-  form_factor: { mobile: "持ち運び向き", standard: "据え置き向き" },
-  deadline: { today: "今日持ち帰り", soon: "1〜2週間以内", later: "検討中" }
+  form_factor: { mobile: "モバイル", standard: "ノート", desktop: "デスクトップ（一体型）" },
+  deadline: { today: "今日持ち帰り", soon: "1〜2週間以内", later: "いつでも・検討中" }
 };
 
 // サマリーの表示順（ここにないキーは末尾にそのまま並ぶ）
-const KEY_ORDER = ["memory_min", "memory_rec", "npu", "form_factor", "office_makers", "maker", "deadline"];
+const KEY_ORDER = ["memory_min", "memory_rec", "copilot_plus", "form_factor", "office_makers", "maker", "deadline"];
 
 let questions = [];
 // 選択状態: { questionId: Set(optionId) }

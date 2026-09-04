@@ -32,6 +32,22 @@ body {
   text-decoration: underline;
 }
 
+/* ヘッダーのアイコンリンク（虫眼鏡など） */
+.icon-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  text-decoration: none;
+}
+
+.icon-link:hover,
+.icon-link:focus {
+  background: rgba(255, 255, 255, 0.15);
+}
+
 /* チェックリスト画面: 2カラム */
 .checklist-layout {
   display: flex;
