@@ -32,15 +32,25 @@ body {
   text-decoration: underline;
 }
 
-/* ヘッダーのアイコンリンク（虫眼鏡など） */
+/* ヘッダーのアイコンリンク（電球＋Tips） */
+.site-header a.icon-link {
+  text-decoration: none;
+}
+
 .icon-link {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
+  gap: 6px;
+  min-width: 44px;
   height: 44px;
-  border-radius: 50%;
+  padding: 0 12px;
+  border-radius: 22px;
   text-decoration: none;
+}
+
+.icon-link-text {
+  font-size: 0.95rem;
 }
 
 .icon-link:hover,

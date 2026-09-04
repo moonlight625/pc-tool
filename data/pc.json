@@ -24,15 +24,6 @@
       ]
     },
     {
-      "id": "office_pref",
-      "label": "Officeの希望",
-      "multiple": false,
-      "options": [
-        { "id": "need",   "label": "Officeが必要",       "conditions": { "office_makers": ["FMV", "NEC", "dynabook"] } },
-        { "id": "none",   "label": "不要・別途契約",     "conditions": {} }
-      ]
-    },
-    {
       "id": "maker",
       "label": "使っていた・欲しいメーカー",
       "multiple": true,
