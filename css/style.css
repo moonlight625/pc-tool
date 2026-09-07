@@ -268,6 +268,28 @@ body {
   color: #fff;
 }
 
+/* 機種一覧のパスワード入力 */
+.unlock-form {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.unlock-form input {
+  flex: 1;
+  min-width: 0;
+  min-height: 44px;
+  padding: 8px 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.unlock-msg {
+  margin-top: 8px;
+  font-size: 0.9rem;
+}
+
 /* Tipsページ */
 .tips-layout {
   max-width: 800px;

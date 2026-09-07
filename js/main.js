@@ -25,18 +25,53 @@ let questions = [];
 let models = [];
 // 選択状態: { questionId: Set(optionId) }
 const selections = {};
+// 機種データは暗号化ファイル（models.enc）で配信し、パスワード入力で復号する
+let encPayload = null;
+let modelsUnlocked = false;
+const PW_STORAGE_KEY = "pc-tool-models-pw";
 
 async function init() {
-  const [pcRes, modelsRes] = await Promise.all([
+  const [pcRes, encRes] = await Promise.all([
     fetch("data/pc.json"),
-    fetch("data/models.json")
+    fetch("data/models.enc")
   ]);
   const data = await pcRes.json();
-  models = await modelsRes.json();
+  encPayload = await encRes.json();
   questions = data.questions;
   renderQuestions();
   document.getElementById("reset-btn").addEventListener("click", resetAll);
+
+  // 同じタブ内で入力済みならパスワードを再利用する
+  const saved = sessionStorage.getItem(PW_STORAGE_KEY);
+  if (saved !== null) {
+    try {
+      await unlockModels(saved);
+    } catch (e) {
+      sessionStorage.removeItem(PW_STORAGE_KEY);
+    }
+  }
   renderSummary();
+}
+
+// パスワードから鍵を導出して機種データを復号する（失敗時は例外）
+async function unlockModels(password) {
+  const b64 = (s) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
+  const enc = new TextEncoder();
+  const keyMaterial = await crypto.subtle.importKey(
+    "raw", enc.encode(password), "PBKDF2", false, ["deriveKey"]
+  );
+  const key = await crypto.subtle.deriveKey(
+    { name: "PBKDF2", salt: b64(encPayload.salt), iterations: encPayload.iter, hash: "SHA-256" },
+    keyMaterial,
+    { name: "AES-GCM", length: 256 },
+    false,
+    ["decrypt"]
+  );
+  const plain = await crypto.subtle.decrypt(
+    { name: "AES-GCM", iv: b64(encPayload.iv) }, key, b64(encPayload.data)
+  );
+  models = JSON.parse(new TextDecoder().decode(plain));
+  modelsUnlocked = true;
 }
 
 function renderQuestions() {
@@ -241,9 +276,57 @@ async function copyModelNo(modelNo, btn) {
   }, 1200);
 }
 
+// ロック中はパスワード入力フォームを表示する
+function renderLockForm() {
+  const container = document.getElementById("models");
+  const count = document.getElementById("models-count");
+  count.textContent = "";
+  if (container.querySelector(".unlock-form")) return; // 入力中は作り直さない
+
+  container.innerHTML = "";
+  const form = document.createElement("form");
+  form.className = "unlock-form";
+
+  const input = document.createElement("input");
+  input.type = "password";
+  input.placeholder = "パスワード";
+  input.autocomplete = "off";
+  form.appendChild(input);
+
+  const btn = document.createElement("button");
+  btn.type = "submit";
+  btn.className = "copy-btn";
+  btn.textContent = "表示";
+  form.appendChild(btn);
+
+  const msg = document.createElement("p");
+  msg.className = "placeholder unlock-msg";
+  msg.textContent = "機種一覧の表示にはパスワードが必要です";
+  container.appendChild(form);
+  container.appendChild(msg);
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    btn.disabled = true;
+    try {
+      await unlockModels(input.value);
+      sessionStorage.setItem(PW_STORAGE_KEY, input.value);
+      renderSummary();
+    } catch (err) {
+      msg.textContent = "パスワードが違います";
+      btn.disabled = false;
+    }
+  });
+}
+
 function renderModels(merged) {
   const container = document.getElementById("models");
   const count = document.getElementById("models-count");
+
+  if (!modelsUnlocked) {
+    renderLockForm();
+    return;
+  }
   container.innerHTML = "";
 
   const matched = models.filter((m) => matchesModel(merged, m));

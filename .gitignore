@@ -1,0 +1,2 @@
+# 機種データの元ファイル（公開しない。公開用は暗号化した data/models.enc）
+data/models.src.json
