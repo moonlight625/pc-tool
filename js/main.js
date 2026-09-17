@@ -114,10 +114,18 @@ function toggleOption(q, opt, btn, optWrap) {
     sel.delete(opt.id);
     btn.classList.remove("selected");
   } else {
-    if (!q.multiple) {
-      // 単一選択: 同じ質問内の他の選択を解除
+    if (!q.multiple || opt.exclusive) {
+      // 単一選択、または「こだわらない」のような排他オプション: 同じ質問内の他の選択を解除
       sel.clear();
       optWrap.querySelectorAll(".option-btn").forEach((b) => b.classList.remove("selected"));
+    } else {
+      // 通常の選択肢を選んだら、排他オプション側を解除する
+      q.options.forEach((o) => {
+        if (!o.exclusive || !sel.has(o.id)) return;
+        sel.delete(o.id);
+        const exBtn = optWrap.querySelector('.option-btn[data-oid="' + o.id + '"]');
+        if (exBtn) exBtn.classList.remove("selected");
+      });
     }
     sel.add(opt.id);
     btn.classList.add("selected");

@@ -34,7 +34,7 @@
         { "id": "dell",     "label": "DELL",     "conditions": { "maker": "DELL" } },
         { "id": "lenovo",   "label": "Lenovo",   "conditions": { "maker": "Lenovo" } },
         { "id": "vaio",     "label": "VAIO",     "conditions": { "maker": "VAIO" } },
-        { "id": "any",      "label": "こだわらない", "conditions": {} }
+        { "id": "any",      "label": "こだわらない", "exclusive": true, "conditions": {} }
       ]
     },
     {
