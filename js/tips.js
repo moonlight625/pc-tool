@@ -1,16 +1,45 @@
 // Tips／知識ページ
-// tips.json を読み込み、カテゴリごとに一覧表示。検索ボックスで絞り込み
+// tips.enc を読み込み、パスワードで復号してカテゴリごとに一覧表示。検索ボックスで絞り込み
+// 復号とパスワード保持の共通処理は js/unlock.js 側にある
 
 let tips = [];
+let encPayload = null;
+let tipsUnlocked = false;
 
 async function init() {
-  const res = await fetch("data/tips.json");
-  tips = await res.json();
+  const res = await fetch("data/tips.enc");
+  encPayload = await res.json();
 
   const input = document.getElementById("search-input");
+  input.disabled = true;
   input.addEventListener("input", () => renderTips(input.value.trim()));
 
+  // 同じタブ内で入力済みならパスワードを再利用する（機種一覧で入力した分も含む）
+  const saved = savedPassword();
+  if (saved !== null) {
+    try {
+      await unlockTips(saved);
+    } catch (e) {
+      clearSavedPassword();
+    }
+  }
   renderTips("");
+}
+
+// Tipsデータを復号する（失敗時は例外）
+async function unlockTips(password) {
+  tips = await decryptPayload(encPayload, password);
+  tipsUnlocked = true;
+  document.getElementById("search-input").disabled = false;
+}
+
+// URL からドメイン名だけ取り出す（不正なURLはそのまま表示）
+function hostLabel(url) {
+  try {
+    return new URL(url).hostname.replace(/^www\./, "");
+  } catch (e) {
+    return url;
+  }
 }
 
 function matches(tip, query) {
@@ -25,6 +54,15 @@ function matches(tip, query) {
 
 function renderTips(query) {
   const container = document.getElementById("tips-list");
+
+  if (!tipsUnlocked) {
+    renderUnlockForm(container, "Tipsの表示にはパスワードが必要です", async (password) => {
+      await unlockTips(password);
+      renderTips(document.getElementById("search-input").value.trim());
+    });
+    return;
+  }
+
   container.innerHTML = "";
 
   const filtered = tips.filter((t) => matches(t, query));
@@ -76,6 +114,18 @@ function renderTips(query) {
         meta.appendChild(span);
       });
 
+      // 出典リンク（source は文字列でも配列でも可）
+      const sources = tip.source ? (Array.isArray(tip.source) ? tip.source : [tip.source]) : [];
+      sources.forEach((url, i) => {
+        const a = document.createElement("a");
+        a.className = "tip-source";
+        a.href = url;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.textContent = (i === 0 ? "出典: " : "") + hostLabel(url);
+        meta.appendChild(a);
+      });
+
       const updated = document.createElement("span");
       updated.className = "updated";
       updated.textContent = "更新: " + (tip.updated || "-");
@@ -91,6 +141,7 @@ function renderTips(query) {
 
 init().catch((err) => {
   document.getElementById("tips-list").textContent =
-    "データの読み込みに失敗しました。ローカル確認は python3 -m http.server で行ってください。";
+    "データの読み込みに失敗しました。data/tips.enc が生成済みか確認してください" +
+    "（ローカル確認は python3 -m http.server で行うこと）。";
   console.error(err);
 });

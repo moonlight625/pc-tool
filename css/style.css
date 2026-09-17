@@ -345,6 +345,17 @@ body {
   padding: 2px 8px;
 }
 
+.tip-source {
+  color: #4a6d96;
+  text-decoration: none;
+  border-bottom: 1px dotted #9db4cd;
+}
+
+.tip-source:hover {
+  color: #1f3d63;
+  border-bottom-style: solid;
+}
+
 .updated {
   color: #888;
   margin-left: auto;

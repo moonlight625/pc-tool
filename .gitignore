@@ -1,2 +1,8 @@
-# 機種データの元ファイル（公開しない。公開用は暗号化した data/models.enc）
+# 非公開データの元ファイル（公開しない。公開用は暗号化した data/*.enc）
 data/models.src.json
+data/tips.src.json
+
+# 運用メモ（リポジトリが public のため公開しない）
+.claude/
+
+.DS_Store
