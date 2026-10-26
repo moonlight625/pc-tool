@@ -53,7 +53,7 @@ function matches(tip, query) {
   const q = query.toLowerCase();
   return (
     tip.title.toLowerCase().includes(q) ||
-    tip.body.toLowerCase().includes(q) ||
+    (tip.body || "").toLowerCase().includes(q) ||
     (tip.tags || []).some((t) => t.toLowerCase().includes(q)) ||
     tableCells(tip.table).some((c) => c.toLowerCase().includes(q))
   );
@@ -135,10 +135,13 @@ function renderTips(query) {
       title.textContent = tip.title;
       article.appendChild(title);
 
-      const body = document.createElement("p");
-      body.className = "tip-body";
-      body.textContent = tip.body;
-      article.appendChild(body);
+      // body は任意（表だけのTipsもある）
+      if (tip.body) {
+        const body = document.createElement("p");
+        body.className = "tip-body";
+        body.textContent = tip.body;
+        article.appendChild(body);
+      }
 
       if (tip.table) article.appendChild(renderTable(tip.table));
 
