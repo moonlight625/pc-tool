@@ -330,6 +330,35 @@ body {
   margin: 0 0 8px;
 }
 
+/* Tips内の表（スマホ幅では横スクロール） */
+.tip-table-wrap {
+  overflow-x: auto;
+  margin: 0 0 8px;
+}
+
+.tip-table {
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.tip-table th,
+.tip-table td {
+  border: 1px solid #ddd;
+  padding: 4px 10px;
+  text-align: left;
+}
+
+/* 1列目（項目名）は折り返さない */
+.tip-table th:first-child,
+.tip-table td:first-child {
+  white-space: nowrap;
+}
+
+.tip-table th {
+  background: #e3ebf4;
+  color: #2b4a6f;
+}
+
 .tip-meta {
   display: flex;
   flex-wrap: wrap;

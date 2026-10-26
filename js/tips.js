@@ -42,14 +42,50 @@ function hostLabel(url) {
   }
 }
 
+// 表の見出し・セルを1つの配列にまとめる（検索用）
+function tableCells(table) {
+  if (!table) return [];
+  return [...(table.head || []), ...(table.rows || []).flat()].map(String);
+}
+
 function matches(tip, query) {
   if (!query) return true;
   const q = query.toLowerCase();
   return (
     tip.title.toLowerCase().includes(q) ||
     tip.body.toLowerCase().includes(q) ||
-    (tip.tags || []).some((t) => t.toLowerCase().includes(q))
+    (tip.tags || []).some((t) => t.toLowerCase().includes(q)) ||
+    tableCells(tip.table).some((c) => c.toLowerCase().includes(q))
   );
+}
+
+// table: { head: [...], rows: [[...], ...] } を表にする。セルは textContent で入れる
+function renderTable(table) {
+  const wrap = document.createElement("div");
+  wrap.className = "tip-table-wrap";
+
+  const el = document.createElement("table");
+  el.className = "tip-table";
+
+  if (table.head) {
+    const tr = el.createTHead().insertRow();
+    table.head.forEach((text) => {
+      const th = document.createElement("th");
+      th.textContent = text;
+      tr.appendChild(th);
+    });
+  }
+
+  const tbody = el.createTBody();
+  (table.rows || []).forEach((row) => {
+    const tr = tbody.insertRow();
+    row.forEach((text) => {
+      tr.insertCell().textContent = text;
+    });
+  });
+
+  wrap.appendChild(el);
+  return wrap;
 }
 
 function renderTips(query) {
@@ -103,6 +139,8 @@ function renderTips(query) {
       body.className = "tip-body";
       body.textContent = tip.body;
       article.appendChild(body);
+
+      if (tip.table) article.appendChild(renderTable(tip.table));
 
       const meta = document.createElement("div");
       meta.className = "tip-meta";
